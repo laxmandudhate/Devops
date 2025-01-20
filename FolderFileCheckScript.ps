@@ -1,0 +1,47 @@
+# Add Windows Forms to show a message box
+Add-Type -AssemblyName "System.Windows.Forms"
+
+# Directory where the folders are located (e.g., "C:\path\to\your\folders")
+$folderPath = "C:\Users\91706\Downloads"
+
+# Ensure the folder exists
+if (-Not (Test-Path $folderPath)) {
+    [System.Windows.Forms.MessageBox]::Show("❌ The specified folder path does not exist: $folderPath", "Error")
+    exit
+}
+
+# Get the current time and the time 4 hours ago
+$timeThreshold = (Get-Date).AddHours(-4)
+
+# Get the latest two folders modified within the last 4 hours based on the last write time
+$latestFolders = Get-ChildItem -Path $folderPath -Directory | 
+                 Where-Object { $_.LastWriteTime -gt $timeThreshold } | 
+                 Sort-Object LastWriteTime -Descending | 
+                 Select-Object -First 2
+
+# Prepare the result string to show in the message box
+$results = ""
+
+# Check if the latest folders exist
+if ($latestFolders) {
+    foreach ($latestFolder in $latestFolders) {
+        $results += "📂 Latest Folder: $($latestFolder.FullName)`n"
+
+        # Get all files inside the folder and its subfolders
+        $files = Get-ChildItem -Path $latestFolder.FullName -File -Recurse
+
+        # Check if files exist in the folder
+        if ($files) {
+            foreach ($file in $files) {
+                $results += "   📄 Found file: $($file.FullName)`n"
+            }
+        } else {
+            $results += "   🚫 No files found in this folder or its subfolders.`n"
+        }
+    }
+} else {
+    $results = "❌ No folders modified within the last 4 hours in $folderPath.`n"
+}
+
+# Show the results in a message box
+[System.Windows.Forms.MessageBox]::Show($results, "Folder and File List")
