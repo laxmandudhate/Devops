@@ -1,0 +1,44 @@
+# Directory where the folders are located (e.g., "C:\path\to\your\folders")
+$folderPath = "C:\Users\91706\Downloads"
+
+# Prompt the user to enter the file name
+$fileName = Read-Host "Enter the file name to check for"
+
+# Ensure the folder exists
+if (-Not (Test-Path $folderPath)) {
+    Write-Host "The specified folder path does not exist: $folderPath"
+    exit
+}
+
+# Get the latest folder based on the last write time
+$latestFolder = Get-ChildItem -Path $folderPath -Directory | Sort-Object LastWriteTime -Descending | Select-Object -First 1
+
+# Check if the latest folder exists
+if ($latestFolder) {
+    Write-Host "Latest folder is: $($latestFolder.FullName)"
+
+    # Get subfolders inside the latest folder
+    $subfolders = Get-ChildItem -Path $latestFolder.FullName -Directory
+
+    # Check if subfolders exist
+    if ($subfolders) {
+        foreach ($subfolder in $subfolders) {
+            Write-Host "  Found subfolder: $($subfolder.FullName)"
+            
+            # Now, search for the specified file within the subfolder
+            $filePath = Get-ChildItem -Path $subfolder.FullName -File | Where-Object { $_.Name -eq $fileName }
+            
+            # Check if the file exists in the subfolder
+            if ($filePath) {
+                Write-Host "    File '$fileName' found in subfolder: $($subfolder.FullName)"
+                Write-Host "    File path: $($filePath.FullName)"
+            } else {
+                Write-Host "    File '$fileName' not found in subfolder: $($subfolder.FullName)"
+            }
+        }
+    } else {
+        Write-Host "  No subfolders found in the latest folder: $($latestFolder.FullName)"
+    }
+} else {
+    Write-Host "No folders found in $folderPath."
+}
