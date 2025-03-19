@@ -16,7 +16,7 @@ What is the Purpose of git stash?
 
 git stash allows you to temporarily save changes without committing them. This is useful when switching branches or pulling updates without losing progress. In DevOps, git stash helps when fixing urgent production issues without committing incomplete infrastructure changes
 
-=========================================================================================================================
+=======================================================================
 merge conflict
 
 A merge conflict happens when two branches modify the same file. Git marks the conflict in the file, and the developer must manually edit it, remove conflict markers, stage the file, and commit the changes. In DevOps, merge conflicts occur when multiple engineers push infrastructure code (Terraform, Kubernetes YAMLs). Using git mergetool or reviewing changes manually ensures smooth collaboration."
@@ -70,8 +70,7 @@ Jenkins
 
 ✅ Example: A Simple CI/CD Pipeline in Jenkins
 
-groovy
-Copy code
+groovy code
 pipeline {
     agent any
     stages {
@@ -95,6 +94,7 @@ pipeline {
 
 
 🔹 Common Jenkins Interview Questions & Answers
+
 1️⃣ What is the difference between Jenkins Freestyle and Pipeline Jobs?
 ✅ Freestyle Jobs: Simple GUI-based automation (limited flexibility).
 ✅ Pipeline Jobs: Uses Jenkinsfile (code-based, more powerful).
@@ -106,31 +106,29 @@ pipeline {
 ✅ Using Webhook Integration with GitHub/GitLab, Cron Jobs (Scheduled Builds), or Polling SCM.
 
 
-====================================================================================================================================
+===========================================================
  How Do You Configure a Jenkins Pipeline?
-
 
 💡 Jenkins Pipeline is a CI/CD automation feature that allows developers to define and manage build, test, and deployment processes as code using a Jenkinsfile.
 
 🔹 Steps to Configure a Jenkins Pipeline
 ✅ 1️⃣ Install and Set Up Jenkins
-
 Install Jenkins on a server or container.
 Install required plugins: Pipeline, Git, Docker, Kubernetes, etc.
-✅ 2️⃣ Create a New Pipeline Job
 
+✅ 2️⃣ Create a New Pipeline Job
 Go to Jenkins Dashboard → New Item → Pipeline.
 Provide a job name and select Pipeline as the type.
-✅ 3️⃣ Define the Pipeline
 
+✅ 3️⃣ Define the Pipeline
 Choose Pipeline Script from SCM (for GitHub/GitLab integration).
 Provide the Git repository URL and branch name (e.g., main).
 Use a Jenkinsfile for version-controlled pipelines.
+
 ✅ 4️⃣ Write a Jenkinsfile (Pipeline as Code)
 Example Declarative Pipeline:
 
-groovy
-Copy code
+groovy code
 pipeline {
     agent any
     stages {
@@ -156,14 +154,15 @@ pipeline {
         }
     }
 }
-✅ 5️⃣ Configure Build Triggers
 
+✅ 5️⃣ Configure Build Triggers
 Webhooks (GitHub/GitLab) for automatic triggering on code changes.
 Poll SCM (e.g., H/5 * * * * to check for updates every 5 minutes).
-✅ 6️⃣ Save and Run the Pipeline
 
+✅ 6️⃣ Save and Run the Pipeline
 Click "Save" → "Build Now".
 Monitor logs in "Console Output".
+
 🔹 Real-World Use Case
 1️⃣ Developer pushes code to GitHub
 2️⃣ Jenkins Pipeline starts automatically
@@ -234,7 +233,7 @@ pipeline {
     }
 }
 
-==============================================================================================================================
+===============================================================================
 
 Blue-Green Deployment in Kubernetes?
 
@@ -250,8 +249,8 @@ Before deploying, ensure you have:
 Deploy the Green (current stable version) first.
 
 📌 Create the Green Deployment (green-deployment.yaml)
-yaml
-Copy code
+yaml code
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -449,9 +448,8 @@ Copy code
 kubectl delete deployment green-app
 🔹 Verify Running Deployment:
 
-bash
-Copy code
 kubectl get deployments
+
 🔹 Summary of Blue-Green Deployment in Kubernetes
 Step	Action
 1️⃣	Deploy Green (current version)
@@ -465,8 +463,7 @@ Step	Action
 ✅ Zero Downtime Deployment
 ✅ Instant Rollback
 ✅ Easy A/B Testing & Canary Rollouts
-==============================================================================================================================
-
+=====================================================================
 What is Kubernetes? (Interview Answer)
 
 
@@ -546,7 +543,7 @@ kubectl get pods
 📌 Real-World Use Case (DevOps & CI/CD)
 💡 "In my last project, we used Kubernetes on Google Kubernetes Engine (GKE) to deploy microservices. We integrated it with Jenkins CI/CD, enabling automated rolling updates, health checks, and auto-scaling, reducing downtime by 90%."
 
-===================================================================================================
+==================================================================
 
 
 What is Docker?
@@ -601,8 +598,7 @@ Dockerfile	Defines instructions for building an image.
 
 
 
-===============================================================================================
-
+========================================================
 
 Explain the architecture of Kubernetes.
 
@@ -647,8 +643,7 @@ Persistent Volume (PV)	Provides persistent storage for stateful applications.
 ==========================================================================================
 
 How do you perform rolling updates in Kubernetes?
-  interviw ans
-ChatGPT said:
+
 In Kubernetes, Rolling Updates allow you to update applications with zero downtime by gradually replacing old pods with new ones. This ensures high availability and smooth upgrades.
 
 How to Perform a Rolling Update in Kubernetes?
@@ -659,34 +654,21 @@ Update the Application:
 
 Imperative Approach (CLI):
 Update the image of a running deployment using:
-sh
-Copy
-Edit
+
 kubectl set image deployment/<deployment-name> <container-name>=<new-image>
-Example:
-sh
-Copy
-Edit
+
 kubectl set image deployment/my-app my-container=my-app:v2
+
 Declarative Approach (YAML):
 Modify the Deployment YAML file to update the image, then apply the changes:
-sh
-Copy
-Edit
+
 kubectl apply -f my-deployment.yaml
+
 Monitor the Update Progress:
 Check the rollout status:
-
-sh
-Copy
-Edit
 kubectl rollout status deployment/<deployment-name>
 Rollback if Needed:
 If the update causes issues, rollback to the previous version:
-
-sh
-Copy
-Edit
 kubectl rollout undo deployment/<deployment-name>
 Control Update Strategy (Optional):
 Define a controlled rollout using maxSurge and maxUnavailable in the Deployment YAML:
