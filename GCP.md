@@ -52,3 +52,23 @@ Google Cloud Pub/Sub is a messaging service used to send and receive messages be
 - **Strong CI/CD tools:** Cloud Build, Artifact Registry, Cloud Deploy.
 - **Open-source friendly:** Works well with Terraform, Prometheus, etc.
 - **Clean UI & billing:** Easier for developers and teams to manage.
+
+---
+
+## Q: What is Google Cloud Armor?
+
+**A:**
+
+Google Cloud Armor is a security service to protect your applications from DDoS attacks, web attacks, and malicious traffic.
+
+- Works with Google Cloud Load Balancers.
+- Helps create rules to allow, deny, or rate-limit traffic based on IPs, geography, or other criteria.
+
+**How to set up Google Cloud Armor (Steps):**
+1. Enable Cloud Armor API in your GCP project.
+2. Go to Google Cloud Console > Security > Cloud Armor.
+3. Click "Create Security Policy."
+4. Add rules to allow or block traffic (e.g., block IPs, allow certain countries).
+5. Attach the policy to your HTTP(S) Load Balancer backend service.
+6. Save and deploy.
+7. Monitor using Cloud Logging and Cloud Monitoring.
