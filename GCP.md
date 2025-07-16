@@ -1,3 +1,42 @@
+## Q: How to Reduce Your GCP Bill?
+
+**A:**
+
+1.Right-Size Your Resources
+- Analyze your VM instances, storage, and databases to ensure they are not over-provisioned.
+- Use smaller machine types or custom machine types that fit your actual workload.
+
+2.Use Committed Use Discounts (CUDs)
+- Purchase commitments for 1 or 3 years to get significant discounts on compute resources.
+
+3.Use Preemptible VMs
+- These are short-lived VMs offered at a much lower price, suitable for batch jobs or fault-tolerant workloads.
+
+4.Shut Down Unused Resources
+- Regularly audit and delete or stop idle instances, unattached disks, and unused IP addresses.
+
+5.Optimize Storage Costs
+- Use appropriate storage classes (Nearline, Coldline, Archive) for infrequently accessed data.
+- Delete obsolete data or move it to cheaper storage.
+
+ 6.Use Autoscaling
+- Configure autoscaling for compute resources to handle load dynamically instead of running large instances 24/7.
+
+ 7.Optimize Network Usage
+- Minimize data egress charges by colocating services in the same region.
+- Use Cloud CDN to cache content closer to users.
+
+ 8.Monitor and Set Budgets/Alerts
+- Use GCP’s billing reports, cost breakdowns, and set up budget alerts to track and control spending.
+
+ 9.Use Serverless Options When Possible
+- Cloud Functions, Cloud Run, or App Engine can be more cost-effective for certain workloads since you pay only for actual usage.
+
+10.Leverage Sustained Use Discounts
+- Automatically applies discounts if you run VMs for a significant portion of the month.
+
+---
+
 ## Q: How do you set up GKE with Fluentd to send logs to Splunk?
 
 **A:**
