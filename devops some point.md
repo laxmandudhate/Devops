@@ -380,7 +380,6 @@ Rolling Updates = Gradually replace old pods with new ones (zero downtime).
     ```sh
     kubectl rollout undo deployment/my-app
     ```
-
 - **Control update speed:**  
     ```yaml
     strategy:
@@ -396,3 +395,41 @@ Rolling Updates = Gradually replace old pods with new ones (zero downtime).
 - Supports rollback
 
 ---
+
+---
+
+---
+
+
+## ❗ What is `ImagePullBackOff`?
+
+`ImagePullBackOff` is a **pod status** in Kubernetes indicating that:
+
+> Kubernetes tried to pull the container image but failed, and it is backing off before retrying again.
+
+---
+
+## 🔍 Common Causes
+
+- ❌ Incorrect image name or tag  
+  _Example: `nginx:lates` instead of `nginx:latest`_
+
+- 🔒 Image doesn't exist in the registry or is private
+
+- 🧾 Missing or incorrect `imagePullSecrets` for private registries
+
+- 🚫 DockerHub pull rate limit exceeded
+
+- 🌐 Network issues or DNS resolution failure
+
+---
+
+## 🛠️ How to Troubleshoot
+
+Run the following commands:
+
+```bash
+kubectl get pods
+kubectl describe pod <pod-name>
+
+
