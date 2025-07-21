@@ -354,3 +354,267 @@ Using the **Horizontal Pod Autoscaler (HPA)**, which adjusts pod count based on 
 - Enable audit logging
 - Use TLS certificates for authentication
 - Restrict access using API server flags (`--authorization-mode`)
+
+
+---
+
+
+# 📦 Kubernetes: Relationship between Pods, ReplicaSets, Deployments, and Namespaces
+
+## 🔹 1. Pods
+- The **smallest unit** in Kubernetes.
+- Encapsulates **one or more containers** with shared storage, network, and specs.
+- Pods are **ephemeral**—not recreated automatically unless managed by a controller like a ReplicaSet or Deployment.
+
+## 🔹 2. ReplicaSets
+- Maintains a **specified number of identical pod replicas**.
+- Ensures pods are replaced if they fail or are deleted.
+- Uses **labels and selectors** to manage groups of pods.
+
+## 🔹 3. Deployments
+- A higher-level abstraction over ReplicaSets.
+- Manages:
+  - **Rolling updates**
+  - **Rollbacks**
+  - **Scaling**
+- Automatically creates and manages ReplicaSets.
+- Workflow:
+  ```
+  Deployment → ReplicaSet → Pods
+  ```
+
+## 🔹 4. Namespaces
+- **Logical partitions** within a Kubernetes cluster.
+- Used for:
+  - Isolating environments (e.g., dev, test, prod)
+  - Applying **RBAC**, **resource quotas**, and **network policies**
+- All other resources (Deployments, ReplicaSets, Pods) reside within a namespace.
+
+## 🔁 Relationship Diagram
+
+```
+Namespace
+ └── Deployment
+      └── ReplicaSet (managed by Deployment)
+           └── Pod(s) (managed by ReplicaSet)
+```
+
+## 🧠 Summary Table
+
+| Resource      | Purpose                                | Related To                        |
+|---------------|----------------------------------------|------------------------------------|
+| **Pod**       | Runs containers                        | Managed by ReplicaSet              |
+| **ReplicaSet**| Maintains number of pods               | Managed by Deployment              |
+| **Deployment**| Handles updates/rollbacks              | Manages ReplicaSet                 |
+| **Namespace** | Logical isolation of resources         | Contains Deployments, Pods, etc.   |
+
+
+---
+
+
+# 🧩 Kubernetes: When to Use a DaemonSet
+
+A **DaemonSet** ensures that a **specific pod runs on all (or selected) nodes** in a Kubernetes cluster. It is mainly used for running background system-level services.
+
+---
+
+## ✅ Use Cases for DaemonSet
+
+| Use Case                         | Description |
+|----------------------------------|-------------|
+| 🛡️ **Monitoring agents**         | Tools like **Prometheus Node Exporter**, **Datadog Agent**, or **Telegraf** to collect metrics from each node. |
+| 📄 **Log collection agents**     | Agents like **Fluentd**, **Filebeat**, or **Logstash** to ship node/pod logs to centralized storage (e.g., ELK, Splunk). |
+| 🔒 **Security agents**           | Antivirus, intrusion detection tools, or file integrity checkers (e.g., Falco, OSSEC) deployed on all nodes. |
+| 🚀 **Custom node setup/config**  | Running scripts, network configurations, or custom agents during node bootstrap. |
+| 🌐 **Networking components**     | CNI plugins (e.g., Calico, Cilium) or kube-proxy when deployed as a pod. |
+| ☁️ **Cloud provider integration**| Tools that interact with cloud APIs for volume mounting, node tagging, etc. |
+
+---
+
+## 🔧 Example Scenario
+
+> You want to collect logs from all nodes using **Fluentd** and ship them to **Splunk**.  
+> ✅ You would use a **DaemonSet** to ensure a Fluentd pod runs on **every node** and accesses `/var/log`.
+
+---
+
+## 🧠 Key Characteristics
+
+- Ensures **one pod per node** (or selected nodes).
+- Automatically adds pods on **new nodes**.
+- Cleans up pods when nodes are **removed**.
+- Can be limited using **node selectors** or **taints/tolerations**.
+
+---
+
+
+# 🛠️ Kubernetes: How to Debug a Failing Pod
+
+Debugging a failing pod in Kubernetes involves using built-in tools to inspect logs, events, resource status, and configuration.
+
+---
+
+## ✅ 1. Check Pod Status
+```bash
+kubectl get pods
+```
+- Look for statuses like `CrashLoopBackOff`, `Pending`, `Error`, `OOMKilled`.
+
+---
+
+## ✅ 2. Describe the Pod
+```bash
+kubectl describe pod <pod-name>
+```
+- Shows detailed information:
+  - Events
+  - Node assignment
+  - Scheduling issues
+  - Container restarts
+
+---
+
+## ✅ 3. Check Logs
+```bash
+kubectl logs <pod-name>
+```
+- For multi-container pods:
+```bash
+kubectl logs <pod-name> -c <container-name>
+```
+- For previously crashed container logs:
+```bash
+kubectl logs --previous <pod-name>
+```
+
+---
+
+## ✅ 4. Exec Into the Pod (If Running)
+```bash
+kubectl exec -it <pod-name> -- /bin/sh
+```
+- Inspect environment variables, config files, logs inside the container.
+
+---
+
+## ✅ 5. Check Events in the Namespace
+```bash
+kubectl get events --sort-by=.metadata.creationTimestamp
+```
+- Helps spot image pull errors, scheduling issues, etc.
+
+---
+
+## ✅ 6. Check Resource Limits
+- Check if the pod is being OOMKilled or has insufficient CPU.
+```bash
+kubectl describe pod <pod-name>
+```
+
+---
+
+## ✅ 7. Inspect Liveness & Readiness Probes
+- Misconfigured probes can cause restarts or prevent traffic routing.
+
+---
+
+## ✅ 8. Check Node Issues
+```bash
+kubectl describe node <node-name>
+kubectl get pods -o wide  # To find which node a pod is running on
+```
+
+---
+
+## ✅ 9. Validate Image and Pull Policy
+- Incorrect image names or `imagePullPolicy: Always` can cause pull errors.
+```bash
+kubectl describe pod <pod-name>
+```
+
+---
+
+## ✅ 10. Use Ephemeral Debug Container (K8s v1.18+)
+```bash
+kubectl debug pod/<pod-name> -c <container-name> --image=busybox --target=<container-name> -- /bin/sh
+```
+- Helpful when the main container won’t start.
+
+---
+
+## 🧠 Tips
+- Use `kubectl get pod <pod-name> -o yaml` to review full configuration.
+- Double-check **ConfigMaps**, **Secrets**, and **Volumes** if they're mounted correctly.
+
+---
+
+# 🔍 Kubernetes Probes: Liveness, Readiness, and Startup
+
+Kubernetes uses three types of probes to manage container lifecycle and health.
+
+---
+
+## ✅ 1. Liveness Probe
+
+- **Purpose:** Checks if the container is still running (not stuck or crashed).
+- **Action on failure:** Kubernetes restarts the container.
+- **Typical use case:** Detect deadlocks, memory leaks, or hung processes.
+
+```yaml
+livenessProbe:
+  httpGet:
+    path: /healthz
+    port: 8080
+  initialDelaySeconds: 10
+  periodSeconds: 5
+```
+
+---
+
+## 📶 2. Readiness Probe
+
+- **Purpose:** Checks if the container is ready to accept traffic.
+- **Action on failure:** Pod is removed from the Service's endpoint list.
+- **Typical use case:** Wait until app is fully initialized (e.g., DB connection ready).
+
+```yaml
+readinessProbe:
+  httpGet:
+    path: /ready
+    port: 8080
+  initialDelaySeconds: 5
+  periodSeconds: 5
+```
+
+---
+
+## ⏳ 3. Startup Probe
+
+- **Purpose:** Checks if the container has started successfully.
+- **Note:** Disables liveness and readiness until it passes.
+- **Typical use case:** For slow-starting apps (e.g., Spring Boot, Java).
+
+```yaml
+startupProbe:
+  httpGet:
+    path: /startup
+    port: 8080
+  failureThreshold: 30
+  periodSeconds: 10
+```
+
+---
+
+## 🧠 Summary Table
+
+| Probe Type     | Purpose                               | Failure Action                        | Use Case Example                       |
+|----------------|----------------------------------------|----------------------------------------|----------------------------------------|
+| Liveness        | Is the container alive?                | Restart the container                 | Unresponsive/stuck app                 |
+| Readiness       | Is the container ready for traffic?    | Remove from service endpoints         | App initializing DB                    |
+| Startup         | Has the container started properly?    | Restart the container                 | Slow-starting apps (Java/Spring Boot)  |
+
+
+---
+
+
+  
