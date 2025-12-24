@@ -25,15 +25,15 @@ A comprehensive guide to essential Linux commands for DevOps professionals, syst
 
 ### pwd (Print Working Directory)
 
-**Theory:** Displays the absolute path of the current working directory. Essential for understanding your location in the file system hierarchy.
+Displays the absolute path of the current working directory. Essential for understanding your location in the file system hierarchy.
 
 ```bash
 pwd
 ```
-
+---
 ### cd (Change Directory)
 
-**Theory:** Navigates between directories in the file system. Supports both absolute and relative paths.
+Navigates between directories in the file system. Supports both absolute and relative paths.
 
 ```bash
 # Navigate to home directory
@@ -51,10 +51,10 @@ cd /usr/local/bin
 # Navigate back to previous directory
 cd -
 ```
-
+---
 ### ls (List Directory Contents)
 
-**Theory:** Lists files and directories with various options for detailed information, including permissions, ownership, and timestamps.
+Lists files and directories with various options for detailed information, including permissions, ownership, and timestamps.
 
 ```bash
 # Simple list
@@ -78,10 +78,10 @@ ls -R
 # List only directories
 ls -d */
 ```
-
+---
 ### mkdir (Make Directory)
 
-**Theory:** Creates new directories. Can create parent directories automatically with recursive option.
+Creates new directories. Can create parent directories automatically with recursive option.
 
 ```bash
 # Create single directory
@@ -96,10 +96,10 @@ mkdir -p /path/to/nested/directories
 # Create with specific permissions
 mkdir -m 755 my_folder
 ```
-
+---
 ### cp (Copy)
 
-**Theory:** Copies files or directories from source to destination. Preserves original files while creating duplicates.
+Copies files or directories from source to destination. Preserves original files while creating duplicates.
 
 ```bash
 # Copy single file
@@ -117,10 +117,10 @@ cp -p source.txt destination.txt
 # Copy with confirmation for overwrites
 cp -i source.txt destination.txt
 ```
-
+---
 ### mv (Move)
 
-**Theory:** Moves or renames files and directories. Works both within the same directory (rename) and across directories (move).
+Moves or renames files and directories. Works both within the same directory (rename) and across directories (move).
 
 ```bash
 # Rename file
@@ -135,10 +135,10 @@ mv old_directory new_directory
 # Move with confirmation
 mv -i source.txt destination/
 ```
-
+---
 ### rm (Remove)
 
-**Theory:** Deletes files and directories. Use with caution as deletion is permanent without recovery options in most cases.
+Deletes files and directories. Use with caution as deletion is permanent without recovery options in most cases.
 
 ```bash
 # Remove single file
@@ -159,10 +159,10 @@ rm -v file.txt
 # Remove directory recursively with confirmation
 rm -ri my_directory
 ```
-
+---
 ### touch (Create Empty File)
 
-**Theory:** Creates empty files or updates file access and modification timestamps. Useful for creating placeholder files.
+Creates empty files or updates file access and modification timestamps. Useful for creating placeholder files.
 
 ```bash
 # Create new empty file
@@ -184,7 +184,7 @@ touch -a file.txt
 
 ### cat (Concatenate and Display)
 
-**Theory:** Displays file contents, concatenates multiple files, and can create new files. Simple and straightforward viewing tool.
+Displays file contents, concatenates multiple files, and can create new files. Simple and straightforward viewing tool.
 
 ```bash
 # Display file contents
@@ -205,10 +205,10 @@ This is line 1
 This is line 2
 EOF
 ```
-
+---
 ### more and less (Paged File Viewing)
 
-**Theory:** Allows viewing large files one page at a time. `less` is more powerful with backward navigation capabilities.
+Allows viewing large files one page at a time. `less` is more powerful with backward navigation capabilities.
 
 ```bash
 # View file with more
@@ -223,10 +223,10 @@ less +100 file.txt
 # Search within less
 # Press '/' then type search term
 ```
-
+---
 ### head and tail (View File Portions)
 
-**Theory:** Display the beginning (head) or end (tail) of files. Extremely useful for log files and large datasets.
+Display the beginning (head) or end (tail) of files. Extremely useful for log files and large datasets.
 
 ```bash
 # Display first 10 lines (default)
@@ -247,10 +247,10 @@ tail -f /var/log/syslog
 # Display lines 10-20
 head -n 20 file.txt | tail -n 11
 ```
-
+---
 ### nano and vim (Text Editors)
 
-**Theory:** Command-line text editors for creating and editing files. `nano` is beginner-friendly; `vim` is powerful but has a steep learning curve.
+Command-line text editors for creating and editing files. `nano` is beginner-friendly; `vim` is powerful but has a steep learning curve.
 
 ```bash
 # Open file with nano (easy to use)
@@ -267,7 +267,7 @@ nano new_file.txt
 
 ### grep (Search Text)
 
-**Theory:** Searches for patterns in files or text streams. Fundamental tool for text processing and log analysis.
+Searches for patterns in files or text streams. Fundamental tool for text processing and log analysis.
 
 ```bash
 # Search for pattern in file
@@ -298,7 +298,7 @@ grep -B 2 -A 2 "pattern" file.txt
 
 ### sed (Stream Editor)
 
-**Theory:** Performs text transformations on input streams or files. Powerful for substitutions, deletions, and pattern-based edits.
+Performs text transformations on input streams or files. Powerful for substitutions, deletions, and pattern-based edits.
 
 ```bash
 # Simple substitution
@@ -322,7 +322,7 @@ sed -n '5,10p' file.txt
 
 ### awk (Text Processing Language)
 
-**Theory:** Powerful tool for processing and analyzing structured text and data. Works line-by-line and supports field-based operations.
+Powerful tool for processing and analyzing structured text and data. Works line-by-line and supports field-based operations.
 
 ```bash
 # Print specific fields
@@ -346,7 +346,7 @@ awk -F':' '{print $1}' /etc/passwd
 
 ### sort (Sort Lines)
 
-**Theory:** Sorts lines of text files. Supports numeric sorting, reverse sorting, and key-based sorting.
+Sorts lines of text files. Supports numeric sorting, reverse sorting, and key-based sorting.
 
 ```bash
 # Simple sort alphabetically
@@ -370,7 +370,7 @@ sort -f file.txt
 
 ### uniq (Remove Duplicates)
 
-**Theory:** Removes or counts duplicate adjacent lines. Usually used with `sort` for effective duplicate removal.
+Removes or counts duplicate adjacent lines. Usually used with `sort` for effective duplicate removal.
 
 ```bash
 # Remove duplicate lines (must be sorted)
@@ -388,7 +388,7 @@ sort file.txt | uniq -u
 
 ### cut (Extract Columns)
 
-**Theory:** Extracts specific columns or fields from each line of input. Works with delimiters for structured data.
+Extracts specific columns or fields from each line of input. Works with delimiters for structured data.
 
 ```bash
 # Extract specific characters
@@ -410,7 +410,7 @@ cut -d',' -f 1-2,4- data.csv
 
 ### chmod (Change Permissions)
 
-**Theory:** Modifies file and directory permissions using either symbolic (u/g/o/a ±rwx) or octal (0-7) notation.
+Modifies file and directory permissions using either symbolic (u/g/o/a ±rwx) or octal (0-7) notation.
 
 ```bash
 # Symbolic notation: add executable for owner
@@ -435,7 +435,7 @@ chmod -R 755 /path/to/directory
 
 ### chown (Change Ownership)
 
-**Theory:** Changes file and directory owner and/or group. Requires appropriate privileges.
+Changes file and directory owner and/or group. Requires appropriate privileges.
 
 ```bash
 # Change owner
@@ -453,7 +453,7 @@ chown :new_group file.txt
 
 ### chgrp (Change Group)
 
-**Theory:** Changes only the group ownership of files. Simpler than chown when only group needs modification.
+Changes only the group ownership of files. Simpler than chown when only group needs modification.
 
 ```bash
 # Change group
@@ -465,7 +465,7 @@ chgrp -R new_group /path/to/directory
 
 ### umask (Set Default Permissions)
 
-**Theory:** Sets default permissions for newly created files and directories. Mask value is subtracted from base permissions.
+Sets default permissions for newly created files and directories. Mask value is subtracted from base permissions.
 
 ```bash
 # Display current umask
@@ -484,7 +484,7 @@ echo "umask 077" >> ~/.bashrc
 
 ### uname (System Information)
 
-**Theory:** Displays system information including kernel name, version, hardware platform, and processor type.
+Displays system information including kernel name, version, hardware platform, and processor type.
 
 ```bash
 # All system information
@@ -505,7 +505,7 @@ uname -p
 
 ### hostnamectl (Hostname Management)
 
-**Theory:** Manages hostname and deployment environment information. Modern replacement for older hostname command.
+Manages hostname and deployment environment information. Modern replacement for older hostname command.
 
 ```bash
 # Display current hostname
@@ -520,7 +520,7 @@ sudo hostnamectl set-hostname new-hostname --pretty
 
 ### whoami (Current User)
 
-**Theory:** Displays the current logged-in user. Useful in scripts to determine execution context.
+Displays the current logged-in user. Useful in scripts to determine execution context.
 
 ```bash
 # Display current user
@@ -535,7 +535,7 @@ id -u
 
 ### df (Disk Space Usage)
 
-**Theory:** Reports file system disk space usage. Essential for monitoring storage capacity.
+Reports file system disk space usage. Essential for monitoring storage capacity.
 
 ```bash
 # Display disk usage
@@ -556,7 +556,7 @@ df -h --exclude-type=tmpfs
 
 ### du (Directory Usage)
 
-**Theory:** Estimates directory space usage recursively. Helps identify large directories consuming disk space.
+Estimates directory space usage recursively. Helps identify large directories consuming disk space.
 
 ```bash
 # Directory space usage
@@ -577,7 +577,7 @@ du -h --max-depth=1 /path/to/directory
 
 ### free (Memory Usage)
 
-**Theory:** Displays RAM and swap memory usage. Critical for understanding system memory availability.
+Displays RAM and swap memory usage. Critical for understanding system memory availability.
 
 ```bash
 # Display memory usage
@@ -598,7 +598,7 @@ free -h -s 2
 
 ### uptime (System Uptime)
 
-**Theory:** Shows how long the system has been running and current load average.
+Shows how long the system has been running and current load average.
 
 ```bash
 # Display uptime and load average
@@ -613,7 +613,7 @@ uptime -p
 
 ### date (System Date and Time)
 
-**Theory:** Displays or sets system date and time. Essential for logging and time-based operations.
+Displays or sets system date and time. Essential for logging and time-based operations.
 
 ```bash
 # Display current date and time
@@ -638,7 +638,7 @@ sudo date -s "2025-12-24 14:21:18"
 
 ### ps (Process Status)
 
-**Theory:** Lists running processes with various information including PID, status, and resource usage.
+Lists running processes with various information including PID, status, and resource usage.
 
 ```bash
 # List all processes
@@ -662,7 +662,7 @@ ps aux --sort=-%cpu
 
 ### top (Interactive Process Monitor)
 
-**Theory:** Real-time system monitoring showing CPU, memory, and process information. Interactive interface with sorting capabilities.
+Real-time system monitoring showing CPU, memory, and process information. Interactive interface with sorting capabilities.
 
 ```bash
 # Launch top
@@ -685,7 +685,7 @@ top -o %MEM
 
 ### kill (Terminate Process)
 
-**Theory:** Sends signals to processes. Signal 15 (TERM) is graceful; signal 9 (KILL) is forceful but risky.
+Sends signals to processes. Signal 15 (TERM) is graceful; signal 9 (KILL) is forceful but risky.
 
 ```bash
 # Kill by PID (graceful)
@@ -706,7 +706,7 @@ kill -l
 
 ### pkill (Process Kill by Name)
 
-**Theory:** Kills processes by name or pattern. More convenient than ps | grep | kill pipeline.
+Kills processes by name or pattern. More convenient than ps | grep | kill pipeline.
 
 ```bash
 # Kill process by name
@@ -724,7 +724,7 @@ pkill -u username
 
 ### bg and fg (Background and Foreground)
 
-**Theory:** Manages job control. Move processes between foreground and background execution.
+Manages job control. Move processes between foreground and background execution.
 
 ```bash
 # Send running process to background
@@ -745,7 +745,7 @@ bg %1
 
 ### nohup (No Hangup)
 
-**Theory:** Runs processes immune to terminal disconnection. Essential for long-running remote processes.
+Runs processes immune to terminal disconnection. Essential for long-running remote processes.
 
 ```bash
 # Run command and ignore hangup signal
@@ -764,7 +764,7 @@ cat nohup.out
 
 ### ping (Test Connectivity)
 
-**Theory:** Tests connectivity to remote hosts using ICMP packets. Verifies network accessibility and latency.
+Tests connectivity to remote hosts using ICMP packets. Verifies network accessibility and latency.
 
 ```bash
 # Ping remote host
@@ -779,10 +779,10 @@ ping -s 56 google.com
 # Set timeout (Linux)
 ping -w 5000 google.com
 ```
-
+---
 ### ifconfig (Interface Configuration)
 
-**Theory:** Displays or configures network interfaces. Shows IP addresses, MAC addresses, and network statistics.
+Displays or configures network interfaces. Shows IP addresses, MAC addresses, and network statistics.
 
 ```bash
 # Display all interfaces
@@ -800,10 +800,10 @@ sudo ifconfig eth0 up
 # Disable interface
 sudo ifconfig eth0 down
 ```
-
+---
 ### ip (IP Configuration)
 
-**Theory:** Modern replacement for ifconfig. More powerful tool for network configuration and management.
+Modern replacement for ifconfig. More powerful tool for network configuration and management.
 
 ```bash
 # Display all interfaces and addresses
@@ -824,10 +824,10 @@ ip route show
 # Add route
 sudo ip route add 192.168.2.0/24 via 192.168.1.1
 ```
-
+---
 ### netstat (Network Statistics)
 
-**Theory:** Displays network connections, routing tables, and interface statistics. Essential for troubleshooting network issues.
+Displays network connections, routing tables, and interface statistics. Essential for troubleshooting network issues.
 
 ```bash
 # List all connections
@@ -851,10 +851,10 @@ netstat -c
 # Show statistics
 netstat -s
 ```
-
+---
 ### ss (Socket Statistics)
 
-**Theory:** Modern replacement for netstat. More efficient tool for viewing socket statistics and connections.
+Modern replacement for netstat. More efficient tool for viewing socket statistics and connections.
 
 ```bash
 # Show all sockets
@@ -878,10 +878,10 @@ ss -s
 # Show detailed socket information
 ss -ed
 ```
-
+---
 ### nslookup and dig (DNS Lookup)
 
-**Theory:** Query DNS nameservers to resolve domain names. Essential for DNS troubleshooting and verification.
+Query DNS nameservers to resolve domain names. Essential for DNS troubleshooting and verification.
 
 ```bash
 # Simple DNS lookup
@@ -902,10 +902,10 @@ dig google.com MX
 # Short answer only
 dig +short google.com
 ```
-
+---
 ### traceroute (Trace Network Path)
 
-**Theory:** Shows the route packets take to reach a destination. Useful for identifying network path issues.
+Shows the route packets take to reach a destination. Useful for identifying network path issues.
 
 ```bash
 # Trace route to host
@@ -920,10 +920,10 @@ traceroute -m 20 google.com
 # Set packet size
 traceroute -s 56 google.com
 ```
-
+---
 ### wget and curl (Download Files)
 
-**Theory:** Download files from the internet using HTTP/HTTPS protocols. `wget` is simpler; `curl` is more flexible.
+Download files from the internet using HTTP/HTTPS protocols. `wget` is simpler; `curl` is more flexible.
 
 ```bash
 # Download file with wget
@@ -951,7 +951,7 @@ curl -I https://example.com
 
 ### useradd (Add User)
 
-**Theory:** Creates new user accounts. Requires root privileges and follows system-wide user naming conventions.
+Creates new user accounts. Requires root privileges and follows system-wide user naming conventions.
 
 ```bash
 # Create basic user
@@ -969,10 +969,10 @@ sudo useradd -m -u 1000 new_user
 # Create user and add to group
 sudo useradd -m -G sudo new_user
 ```
-
+---
 ### usermod (Modify User)
 
-**Theory:** Modifies existing user account properties including groups, shell, and home directory.
+Modifies existing user account properties including groups, shell, and home directory.
 
 ```bash
 # Add user to group
@@ -990,10 +990,10 @@ sudo usermod -L username
 # Unlock user account
 sudo usermod -U username
 ```
-
+---
 ### userdel (Delete User)
 
-**Theory:** Removes user accounts. Use caution as this operation is permanent.
+Removes user accounts. Use caution as this operation is permanent.
 
 ```bash
 # Remove user (keep home directory)
@@ -1005,10 +1005,10 @@ sudo userdel -r username
 # Remove user and all files
 sudo userdel -rf username
 ```
-
+---
 ### passwd (Change Password)
 
-**Theory:** Changes user password. Can set expiry and complexity requirements.
+Changes user password. Can set expiry and complexity requirements.
 
 ```bash
 # Change current user password
@@ -1026,10 +1026,10 @@ sudo passwd -l username
 # Unlock account
 sudo passwd -u username
 ```
-
+---
 ### groupadd (Add Group)
 
-**Theory:** Creates new user groups. Used to organize users with shared permissions.
+Creates new user groups. Used to organize users with shared permissions.
 
 ```bash
 # Create basic group
@@ -1038,19 +1038,19 @@ sudo groupadd groupname
 # Create group with specific GID
 sudo groupadd -g 1000 groupname
 ```
-
+---
 ### groupdel (Delete Group)
 
-**Theory:** Removes user groups. Group must not be primary group of any user.
+Removes user groups. Group must not be primary group of any user.
 
 ```bash
 # Delete group
 sudo groupdel groupname
 ```
-
+---
 ### sudo (Execute as Superuser)
 
-**Theory:** Executes commands with superuser privileges. Primary method for privilege escalation in Linux.
+Executes commands with superuser privileges. Primary method for privilege escalation in Linux.
 
 ```bash
 # Execute command as root
@@ -1075,7 +1075,7 @@ sudo -l
 
 ### apt (Debian/Ubuntu)
 
-**Theory:** Advanced Package Tool for Debian-based systems. Manages software packages with dependency resolution.
+Advanced Package Tool for Debian-based systems. Manages software packages with dependency resolution.
 
 ```bash
 # Update package lists
@@ -1102,10 +1102,10 @@ apt show package_name
 # List installed packages
 apt list --installed
 ```
-
+---
 ### yum/dnf (RedHat/CentOS/Fedora)
 
-**Theory:** Package managers for RedHat-based systems. `dnf` is the modern replacement for `yum`.
+Package managers for RedHat-based systems. `dnf` is the modern replacement for `yum`.
 
 ```bash
 # Update package lists
@@ -1129,10 +1129,10 @@ dnf list installed
 # Update all packages
 sudo dnf upgrade
 ```
-
+---
 ### snap (Universal Package Manager)
 
-**Theory:** Universal package manager working across different Linux distributions. Self-contained application bundles.
+Universal package manager working across different Linux distributions. Self-contained application bundles.
 
 ```bash
 # Install snap package
@@ -1157,7 +1157,7 @@ sudo snap refresh
 
 ### tar (Tape Archive)
 
-**Theory:** Creates and extracts archive files. Fundamental tool for file distribution and backups.
+Creates and extracts archive files. Fundamental tool for file distribution and backups.
 
 ```bash
 # Create tar archive
@@ -1184,10 +1184,10 @@ tar -cjvf archive.tar.bz2 file1 directory
 # Extract tar.bz2
 tar -xjvf archive.tar.bz2
 ```
-
+---
 ### gzip (GNU Zip)
 
-**Theory:** Compresses and decompresses files using gzip format. Efficient compression for single files.
+Compresses and decompresses files using gzip format. Efficient compression for single files.
 
 ```bash
 # Compress file
@@ -1205,10 +1205,10 @@ gzip -v file.txt
 # Set compression level (1-9)
 gzip -9 file.txt
 ```
-
+---
 ### zip and unzip
 
-**Theory:** Creates and extracts ZIP archives. Widely compatible across different operating systems.
+Creates and extracts ZIP archives. Widely compatible across different operating systems.
 
 ```bash
 # Create zip archive
@@ -1236,7 +1236,7 @@ unzip -t archive.zip
 
 ### find (Find Files)
 
-**Theory:** Searches for files and directories based on various criteria. Powerful tool with extensive filtering options.
+Searches for files and directories based on various criteria. Powerful tool with extensive filtering options.
 
 ```bash
 # Find files in directory
@@ -1263,10 +1263,10 @@ find /path -name "*.log" -delete
 # Find with multiple conditions
 find /path -type f -name "*.txt" -size +1M
 ```
-
+---
 ### locate (Locate Files)
 
-**Theory:** Uses database index for fast file location. Much faster than find but requires periodic database updates.
+Uses database index for fast file location. Much faster than find but requires periodic database updates.
 
 ```bash
 # Find file by name
@@ -1284,10 +1284,10 @@ sudo updatedb
 # Search in specific directory
 locate -r "^/home.*\.conf$"
 ```
-
+---
 ### which (Locate Command)
 
-**Theory:** Shows the location of command executables in PATH. Useful for debugging command conflicts.
+Shows the location of command executables in PATH. Useful for debugging command conflicts.
 
 ```bash
 # Find command location
@@ -1299,10 +1299,10 @@ which -a python
 # Show all matching executables
 type python
 ```
-
+---
 ### whereis (Locate Command Source)
 
-**Theory:** Locates command binary, source, and manual pages. Provides comprehensive command location information.
+Locates command binary, source, and manual pages. Provides comprehensive command location information.
 
 ```bash
 # Find command and documentation
@@ -1324,7 +1324,7 @@ whereis -m python
 
 ### watch (Monitor Changes)
 
-**Theory:** Executes command repeatedly and displays output. Useful for monitoring system changes in real-time.
+Executes command repeatedly and displays output. Useful for monitoring system changes in real-time.
 
 ```bash
 # Watch command output (default 2 seconds)
@@ -1342,10 +1342,10 @@ watch df -h
 # Watch process list
 watch 'ps aux | grep process'
 ```
-
+---
 ### systemctl (System Service Management)
 
-**Theory:** Controls systemd services and system state. Essential for managing daemons and system services.
+Controls systemd services and system state. Essential for managing daemons and system services.
 
 ```bash
 # Start service
@@ -1372,10 +1372,10 @@ systemctl list-units --type=service
 # View service logs
 journalctl -u service_name
 ```
-
+---
 ### journalctl (View System Logs)
 
-**Theory:** Queries and displays systemd journal logs. Modern logging system with powerful filtering.
+Queries and displays systemd journal logs. Modern logging system with powerful filtering.
 
 ```bash
 # Display recent logs
@@ -1399,10 +1399,10 @@ journalctl -n 100
 # Show logs with priority ERROR or higher
 journalctl -p err
 ```
-
+---
 ### iostat (I/O Statistics)
 
-**Theory:** Reports CPU and input/output statistics. Essential for identifying disk and CPU bottlenecks.
+Reports CPU and input/output statistics. Essential for identifying disk and CPU bottlenecks.
 
 ```bash
 # Display I/O statistics
@@ -1420,10 +1420,10 @@ iostat -x sda
 # Display CPU statistics
 iostat -c
 ```
-
+---
 ### iotop (I/O Top)
 
-**Theory:** Real-time monitoring of disk I/O usage per process. Similar to top but for I/O operations.
+Real-time monitoring of disk I/O usage per process. Similar to top but for I/O operations.
 
 ```bash
 # Monitor I/O usage
@@ -1445,7 +1445,7 @@ sudo iotop -p PID
 
 ### history (Command History)
 
-**Theory:** Shows previously executed commands. Helps recall and reuse past commands.
+Shows previously executed commands. Helps recall and reuse past commands.
 
 ```bash
 # Display command history
@@ -1463,10 +1463,10 @@ history -c
 # Clear specific line
 history -d 100
 ```
-
+---
 ### alias (Create Command Alias)
 
-**Theory:** Creates shortcuts for frequently used commands. Improves efficiency and reduces typing.
+Creates shortcuts for frequently used commands. Improves efficiency and reduces typing.
 
 ```bash
 # Create alias
@@ -1484,10 +1484,10 @@ unalias ll
 # Make alias permanent
 echo "alias ll='ls -lah'" >> ~/.bashrc
 ```
-
+---
 ### echo (Print Text)
 
-**Theory:** Outputs text to standard output. Fundamental tool for displaying messages and variables.
+Outputs text to standard output. Fundamental tool for displaying messages and variables.
 
 ```bash
 # Print simple text
@@ -1508,10 +1508,10 @@ echo "Text" > file.txt
 # Append to file
 echo "Text" >> file.txt
 ```
-
+---
 ### man (Manual Pages)
 
-**Theory:** Displays system documentation. Essential resource for learning command options and syntax.
+Displays system documentation. Essential resource for learning command options and syntax.
 
 ```bash
 # Display command manual
@@ -1534,16 +1534,17 @@ man man
 
 ## Summary
 
-This cheat sheet covers the most essential Linux commands for system administration, DevOps work, and development. Regular practice with these commands will build proficiency in Linux command-line operations.
+This cheat sheet covers the most essential Linux commands used in system administration, DevOps, and day-to-day development work. Regular practice with these commands will help build strong proficiency in Linux command-line operations.
 
 **Key Tips:**
-- Always use `man` for detailed command documentation
-- Practice in a safe environment before running potentially destructive commands
-- Use `--help` flag for quick command option reference
-- Combine commands using pipes (`|`) for powerful operations
-- Use tab completion to speed up command typing
+- Use `man` pages for detailed command documentation
+- Practice commands in a safe environment before using them in production
+- Use the `--help` flag for quick option references
+- Combine commands with pipes (`|`) for powerful workflows
+- Use tab completion to improve speed and accuracy
 
 ---
 
-**Last Updated:** 2025-12-24
-**Maintainer:** laxmandudhate
+**Last Updated:** 24 December 2025  
+**Maintained by:** Laxman Dudhate  
+
