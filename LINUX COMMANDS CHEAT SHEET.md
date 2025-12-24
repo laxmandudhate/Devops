@@ -3,7 +3,7 @@
 A comprehensive guide to essential Linux commands for DevOps professionals, system administrators, and developers.
 
 ---    
-
+ 
 ## Table of Contents 
 
 1. [File and Directory Operations](#file-and-directory-operations)
