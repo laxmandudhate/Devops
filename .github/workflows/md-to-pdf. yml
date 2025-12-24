@@ -1,37 +1,82 @@
 name: Convert Markdown to PDF
 
-on:
+on:  
   push:
-    paths:
+    paths: 
       - 'LINUX COMMANDS CHEAT SHEET.md'
     branches:
       - main
   workflow_dispatch:
 
 jobs: 
-  convert-to-pdf:
+  convert-to-pdf: 
     runs-on: ubuntu-latest
-    
+    permissions:
+      contents: write
+
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - name:  Checkout code
+        uses: actions/checkout@v4
 
-      - name: Install pandoc
-        run: sudo apt-get update && sudo apt-get install -y pandoc
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pandoc wkhtmltopdf xvfb fonts-dejavu
 
-      - name: Convert MD to PDF
-        run: pandoc "LINUX COMMANDS CHEAT SHEET.md" -o "LINUX COMMANDS CHEAT SHEET.pdf"
+      - name: Convert Markdown to HTML first
+        run: |
+          pandoc "LINUX COMMANDS CHEAT SHEET.md" \
+            -o "temp. html" \
+            -f markdown \
+            -t html5 \
+            --self-contained \
+            --css /dev/null
 
-      - name: Upload artifact
-        uses: actions/upload-artifact@v3
+      - name: Convert HTML to PDF
+        run: |
+          xvfb-run -a wkhtmltopdf \
+            --margin-top 0.75in \
+            --margin-bottom 0.75in \
+            --margin-left 0.75in \
+            --margin-right 0.75in \
+            --print-media-type \
+            "temp.html" \
+            "LINUX COMMANDS CHEAT SHEET.pdf" || \
+          wkhtmltopdf \
+            --margin-top 0.75in \
+            --margin-bottom 0.75in \
+            --margin-left 0.75in \
+            --margin-right 0.75in \
+            --print-media-type \
+            "temp.html" \
+            "LINUX COMMANDS CHEAT SHEET.pdf"
+
+      - name:  Verify PDF created
+        run: |
+          if [ -f "LINUX COMMANDS CHEAT SHEET.pdf" ]; then
+            echo "PDF created successfully"
+            ls -lh "LINUX COMMANDS CHEAT SHEET.pdf"
+          else
+            echo "PDF creation failed"
+            exit 1
+          fi
+
+      - name: Upload PDF artifact
+        uses: actions/upload-artifact@v4
         with: 
           name: pdf-output
           path: "LINUX COMMANDS CHEAT SHEET.pdf"
+          retention-days: 30
 
       - name: Commit and push PDF
         run: |
           git config user.email "action@github.com"
           git config user.name "GitHub Action"
           git add "LINUX COMMANDS CHEAT SHEET.pdf"
-          git commit -m "Auto-generated PDF" || true
-          git push || true
+          git commit -m "Auto-generated PDF from LINUX COMMANDS CHEAT SHEET. md" || echo "No changes"
+          git push || echo "Nothing to push"
+        env: 
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name:  Cleanup
+        run: rm -f "temp.html"
