@@ -17,23 +17,24 @@ jobs:
       contents: write
 
     steps:
+      # 1️⃣ Checkout repository
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # 2️⃣ Install required dependencies
       - name: Install dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y pandoc wkhtmltopdf xvfb fonts-dejavu
 
+      # 3️⃣ Convert Markdown → HTML
       - name: Convert Markdown to HTML
         run: |
           pandoc "LINUX COMMANDS CHEAT SHEET.md" \
             -o "temp.html" \
-            --standalone \
-            --toc \
-            --metadata title="Linux Commands Cheat Sheet" \
-            --metadata author="Laxman Dudhate"
+            --standalone
 
+      # 4️⃣ Convert HTML → PDF (Headless-safe)
       - name: Convert HTML to PDF
         run: |
           xvfb-run -a wkhtmltopdf \
@@ -45,6 +46,26 @@ jobs:
             "temp.html" \
             "LINUX COMMANDS CHEAT SHEET.pdf"
 
+      # 5️⃣ Verify PDF creation
+      - name: Verify PDF created
+        run: |
+          if [ -f "LINUX COMMANDS CHEAT SHEET.pdf" ]; then
+            echo "PDF created successfully"
+            ls -lh "LINUX COMMANDS CHEAT SHEET.pdf"
+          else
+            echo "PDF creation failed"
+            exit 1
+          fi
+
+      # 6️⃣ Upload PDF as artifact
+      - name: Upload PDF artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux-commands-cheat-sheet-pdf
+          path: "LINUX COMMANDS CHEAT SHEET.pdf"
+          retention-days: 30
+
+      # 7️⃣ Commit & push generated PDF
       - name: Commit and push PDF
         run: |
           git config user.email "action@github.com"
@@ -52,3 +73,8 @@ jobs:
           git add "LINUX COMMANDS CHEAT SHEET.pdf"
           git diff --cached --quiet || git commit -m "Auto-generate PDF from Markdown"
           git push
+
+      # 8️⃣ Cleanup temp files
+      - name: Cleanup
+        run: |
+          rm -f temp.html
