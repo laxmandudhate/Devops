@@ -1,0 +1,37 @@
+name: Convert Markdown to PDF
+
+on:
+  push:
+    paths:
+      - 'LINUX COMMANDS CHEAT SHEET.md'
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs: 
+  convert-to-pdf:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install pandoc
+        run: sudo apt-get update && sudo apt-get install -y pandoc
+
+      - name: Convert MD to PDF
+        run: pandoc "LINUX COMMANDS CHEAT SHEET.md" -o "LINUX COMMANDS CHEAT SHEET.pdf"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with: 
+          name: pdf-output
+          path: "LINUX COMMANDS CHEAT SHEET.pdf"
+
+      - name: Commit and push PDF
+        run: |
+          git config user.email "action@github.com"
+          git config user.name "GitHub Action"
+          git add "LINUX COMMANDS CHEAT SHEET.pdf"
+          git commit -m "Auto-generated PDF" || true
+          git push || true
