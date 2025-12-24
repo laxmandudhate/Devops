@@ -4,7 +4,7 @@ A comprehensive guide to essential Linux commands for DevOps professionals, syst
 
 ---
 
-## Table of Contents
+## Table of Contents 
 
 1. [File and Directory Operations](#file-and-directory-operations)
 2. [File Viewing and Editing](#file-viewing-and-editing)
