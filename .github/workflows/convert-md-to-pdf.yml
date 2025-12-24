@@ -23,9 +23,13 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y pandoc wkhtmltopdf xvfb fonts-dejavu
       
+      - name: Prepare Markdown file
+        run: |
+          sed '/^---$/d' "LINUX COMMANDS CHEAT SHEET.md" > temp.md
+      
       - name: Convert Markdown to HTML
         run: |
-          pandoc "LINUX COMMANDS CHEAT SHEET.md" \
+          pandoc temp.md \
             -o "temp.html" \
             --standalone \
             --toc \
