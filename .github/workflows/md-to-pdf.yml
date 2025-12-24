@@ -1,50 +1,48 @@
 name: Convert Markdown to PDF
 
-on:
+on: 
   push:
-    paths:
+    paths: 
       - 'LINUX COMMANDS CHEAT SHEET.md'
-      - '.github/workflows/md-to-pdf.yml'
     branches:
       - main
   workflow_dispatch:
 
-jobs:
-  convert-md-to-pdf:
+jobs: 
+  convert-to-pdf: 
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - name:  Checkout code
+        uses: actions/checkout@v4
 
       - name: Install pandoc
-        run: sudo apt-get update && sudo apt-get install -y pandoc wkhtmltopdf
+        run: sudo apt-get update && sudo apt-get install -y pandoc
 
-      - name: Convert Markdown to PDF
+      - name:  Convert Markdown to PDF
         run: |
           pandoc "LINUX COMMANDS CHEAT SHEET.md" \
             -o "LINUX COMMANDS CHEAT SHEET.pdf" \
-            -f markdown \
-            -t pdf \
-            --pdf-engine=xvfb-run\ pdfrw \
-            --variable urlcolor=cyan \
-            --variable linkcolor=blue \
-            --variable mainfont="DejaVu Sans" \
-            --toc
+            --toc \
+            --toc-depth=2 \
+            -V colorlinks \
+            -V linkcolor=blue
 
-      - name: Upload PDF as artifact
-        uses: actions/upload-artifact@v3
-        with:
+      - name: Upload PDF artifact
+        uses: actions/upload-artifact@v4
+        with: 
           name: pdf-output
           path: "LINUX COMMANDS CHEAT SHEET.pdf"
           retention-days: 30
 
-      - name: Commit PDF to repository
+      - name: Commit and push PDF
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
+          git config user.email "action@github.com"
+          git config user.name "GitHub Action"
           git add "LINUX COMMANDS CHEAT SHEET.pdf"
-          git commit -m "Auto-generated PDF from LINUX COMMANDS CHEAT SHEET.md" || echo "No changes to commit"
-          git push
+          git commit -m "Auto-generated PDF from LINUX COMMANDS CHEAT SHEET. md" || echo "No changes"
+          git push || echo "Nothing to push"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
