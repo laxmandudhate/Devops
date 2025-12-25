@@ -15,36 +15,34 @@ jobs:
       contents: write
 
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v4
-
-      - name: Debug file presence
-        run: |
-          ls -lh
-          echo "-----"
-          head -n 20 "LINUX COMMANDS CHEAT SHEET.md"
 
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y pandoc wkhtmltopdf xvfb fonts-dejavu
+          sudo apt-get install -y pandoc wkhtmltopdf xvfb fonts-dejavu-core
 
-      - name: Convert Markdown to HTML (SAFE)
+      - name: Convert Markdown to HTML
         run: |
-          pandoc "LINUX COMMANDS CHEAT SHEET.md" \
-            --from markdown+yaml_metadata_block \
+          pandoc \
+            --from=markdown+smart \
+            --to=html5 \
             --standalone \
             --toc \
+            "LINUX COMMANDS CHEAT SHEET.md" \
             -o temp.html
 
       - name: Convert HTML to PDF
         run: |
-          xvfb-run -a wkhtmltopdf \
-            --margin-top 0.75in \
-            --margin-bottom 0.75in \
-            --margin-left 0.75in \
-            --margin-right 0.75in \
+          xvfb-run --auto-servernum \
+            wkhtmltopdf \
+            --enable-local-file-access \
             --print-media-type \
+            --margin-top 20mm \
+            --margin-bottom 20mm \
+            --margin-left 20mm \
+            --margin-right 20mm \
             temp.html \
             "LINUX COMMANDS CHEAT SHEET.pdf"
 
@@ -54,8 +52,8 @@ jobs:
 
       - name: Commit and push PDF
         run: |
-          git config user.email "action@github.com"
-          git config user.name "GitHub Action"
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
           git add "LINUX COMMANDS CHEAT SHEET.pdf"
           git diff --cached --quiet || git commit -m "Auto-generate PDF from Markdown"
           git push
