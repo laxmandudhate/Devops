@@ -35,6 +35,7 @@ jobs:
             --to=html5 \
             --standalone \
             --toc \
+            --toc-location=body \
             --highlight-style=pygments \
             --css=pdf-style.css \
             "LINUX COMMANDS CHEAT SHEET.md" \
