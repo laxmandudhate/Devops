@@ -1,4 +1,46 @@
-# Linux Commands Cheat Sheet  
+<div class="cover-page">
+
+# Linux Commands Cheat Sheet
+
+<p class="subtitle">
+A comprehensive guide to essential Linux commands for DevOps professionals,
+system administrators, and developers.
+</p>
+
+<hr class="cover-divider">
+
+## Table of Contents
+
+<ol class="cover-toc">
+  <li>File and Directory Operations</li>
+  <li>File Content Viewing and Editing</li>
+  <li>Text Processing and Manipulation</li>
+  <li>File Permissions and Ownership</li>
+  <li>File Search and Filtering</li>
+  <li>User and Group Management</li>
+  <li>Process Management</li>
+  <li>Disk and Storage Management</li>
+  <li>Network Configuration and Troubleshooting</li>
+  <li>System Information</li>
+  <li>Package Management</li>
+  <li>Archive and Compression</li>
+  <li>Environment Variables and Shell</li>
+  <li>System Administration</li>
+  <li>Cron Jobs and Scheduling</li>
+  <li>Tips and Tricks</li>
+  <li>Advanced Operations</li>
+</ol>
+
+<hr class="cover-divider">
+
+<p class="author">
+Author: <strong>Laxman  Dudhate</strong><br>
+Last Updated: 29 December 2025
+</p>
+
+</div>
+
+<div class="page-break"></div>
 
 <!-- TOC -->
 
