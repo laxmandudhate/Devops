@@ -85,7 +85,7 @@ li code {
 }
 
 /* =========================================================
-   Use Cases Styling (IMPORTANT)
+   Use Cases Styling (Blockquote – Optional)
 ========================================================= */
 blockquote {
   background: #f1f8ff;
@@ -107,6 +107,30 @@ blockquote ul {
 
 blockquote li {
   margin-bottom: 4px;
+}
+
+/* =========================================================
+   Compact Use Cases (NO MD CHANGE REQUIRED)
+========================================================= */
+
+/* Style the "Use Cases:" label */
+p strong {
+  display: block;
+  margin-top: 8px;
+  margin-bottom: 4px;
+}
+
+/* Tight spacing for bullet list immediately after "Use Cases:" */
+p strong + ul {
+  margin-top: 0;
+  margin-bottom: 12px;
+  padding-left: 18px;
+}
+
+/* Compact bullet items */
+p strong + ul li {
+  margin-bottom: 2px;
+  line-height: 1.4;
 }
 
 /* =========================================================
