@@ -1,6 +1,6 @@
-/* ------------------------
-   Global Styles
-------------------------- */
+/* =========================================================
+   Global / Base Styles
+========================================================= */
 body {
   font-family: "DejaVu Sans", Arial, sans-serif;
   font-size: 12px;
@@ -10,20 +10,20 @@ body {
   padding: 0;
 }
 
-/* ------------------------
+/* =========================================================
    Headings
-------------------------- */
+========================================================= */
 h1 {
   font-size: 26px;
   margin-top: 0;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
   text-align: center;
   page-break-after: avoid;
 }
 
 h2 {
   font-size: 20px;
-  margin-top: 30px;
+  margin-top: 32px;
   margin-bottom: 10px;
   border-bottom: 2px solid #e0e0e0;
   padding-bottom: 4px;
@@ -33,13 +33,13 @@ h2 {
 h3 {
   font-size: 15px;
   margin-top: 22px;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
   page-break-after: avoid;
 }
 
-/* ------------------------
+/* =========================================================
    Paragraphs & Lists
-------------------------- */
+========================================================= */
 p {
   margin: 6px 0 10px 0;
 }
@@ -53,9 +53,9 @@ li {
   margin-bottom: 4px;
 }
 
-/* ------------------------
-   Code Blocks
-------------------------- */
+/* =========================================================
+   Code Blocks (Commands)
+========================================================= */
 pre {
   background: #f6f8fa;
   padding: 12px 14px;
@@ -63,7 +63,7 @@ pre {
   overflow-x: auto;
   font-size: 11px;
   line-height: 1.5;
-  margin: 10px 0 18px 0;
+  margin: 12px 0 18px 0;
   page-break-inside: avoid;
 }
 
@@ -76,9 +76,7 @@ pre code {
   color: #24292e;
 }
 
-/* ------------------------
-   Inline Code
-------------------------- */
+/* Inline code */
 p code,
 li code {
   background: #f0f0f0;
@@ -86,18 +84,43 @@ li code {
   border-radius: 4px;
 }
 
-/* ------------------------
+/* =========================================================
+   Use Cases Styling (IMPORTANT)
+========================================================= */
+blockquote {
+  background: #f1f8ff;
+  border-left: 4px solid #0969da;
+  padding: 10px 14px;
+  margin: 12px 0 18px 0;
+  border-radius: 4px;
+}
+
+blockquote p {
+  margin: 0 0 6px 0;
+  font-weight: bold;
+}
+
+blockquote ul {
+  margin: 0;
+  padding-left: 18px;
+}
+
+blockquote li {
+  margin-bottom: 4px;
+}
+
+/* =========================================================
    Horizontal Rules
-------------------------- */
+========================================================= */
 hr {
   border: none;
   border-top: 1px solid #ddd;
   margin: 28px 0;
 }
 
-/* ------------------------
+/* =========================================================
    Table of Contents
-------------------------- */
+========================================================= */
 #TOC {
   margin-top: 20px;
   margin-bottom: 30px;
@@ -117,16 +140,16 @@ hr {
   color: #000;
 }
 
-/* ------------------------
+/* =========================================================
    Page Break Helpers
-------------------------- */
+========================================================= */
 .page-break {
   page-break-after: always;
 }
 
-/* ------------------------
+/* =========================================================
    Print Optimization
-------------------------- */
+========================================================= */
 @media print {
   a {
     color: black;
