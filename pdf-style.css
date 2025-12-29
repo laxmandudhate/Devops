@@ -1,0 +1,47 @@
+body {
+  font-family: "DejaVu Sans", Arial, sans-serif;
+  font-size: 12px;
+  line-height: 1.6;
+  color: #000;
+}
+
+h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+h2 {
+  font-size: 18px;
+  margin-top: 28px;
+}
+
+h3 {
+  font-size: 15px;
+  margin-top: 22px;
+}
+
+pre {
+  background: #f6f8fa;
+  padding: 12px;
+  border-radius: 6px;
+  overflow-x: auto;
+  font-size: 11px;
+}
+
+code {
+  font-family: "DejaVu Sans Mono", monospace;
+}
+
+pre code {
+  color: #24292e;
+}
+
+ul {
+  margin-left: 20px;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 24px 0;
+}
