@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - "LINUX COMMANDS CHEAT SHEET.md"
+      - "pdf-style.css"
   workflow_dispatch:
 
 jobs:
@@ -21,7 +22,11 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y pandoc wkhtmltopdf xvfb fonts-dejavu-core
+          sudo apt-get install -y \
+            pandoc \
+            wkhtmltopdf \
+            xvfb \
+            fonts-dejavu-core
 
       - name: Convert Markdown to HTML
         run: |
@@ -30,6 +35,8 @@ jobs:
             --to=html5 \
             --standalone \
             --toc \
+            --highlight-style=pygments \
+            --css=pdf-style.css \
             "LINUX COMMANDS CHEAT SHEET.md" \
             -o temp.html
 
@@ -39,10 +46,11 @@ jobs:
             wkhtmltopdf \
             --enable-local-file-access \
             --print-media-type \
+            --disable-smart-shrinking \
             --margin-top 20mm \
             --margin-bottom 20mm \
-            --margin-left 20mm \
-            --margin-right 20mm \
+            --margin-left 18mm \
+            --margin-right 18mm \
             temp.html \
             "LINUX COMMANDS CHEAT SHEET.pdf"
 
