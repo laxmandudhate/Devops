@@ -1,5 +1,9 @@
 # Linux Commands Cheat Sheet
 
+<!-- TOC -->
+
+<div style="page-break-after: always;"></div>
+
 ## File and Directory Operations
 
 ### List Files and Directories
